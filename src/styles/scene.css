@@ -1,0 +1,98 @@
+/* ============================================================
+   场景容器：沙盒 / 车库 / 引导小手
+   ============================================================ */
+
+.sandbox-canvas-host,
+.garage-canvas-host {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.sandbox-canvas-host canvas,
+.garage-canvas-host canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  touch-action: none;
+}
+
+.garage-root {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---------- 引导小手 ---------- */
+.guide-hand-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 18;
+  overflow: hidden;
+}
+
+.guide-hand {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 76px;
+  height: 76px;
+  opacity: 0;
+  will-change: transform, opacity;
+  transform-origin: center center;
+  filter: drop-shadow(0 6px 10px rgba(14, 165, 233, 0.28));
+  transition: opacity 200ms ease-out;
+}
+
+/* ---------- 车库贴纸盒 ---------- */
+.garage-stickerbox {
+  position: absolute;
+  right: calc(20px + var(--safe-right));
+  top: calc(18px + var(--safe-top));
+  width: 78px;
+  padding: 8px 6px 10px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 4px 0 rgba(255, 255, 255, 0.7) inset,
+    0 -4px 8px rgba(148, 197, 222, 0.35) inset,
+    0 8px 16px rgba(56, 120, 160, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.garage-stickerbox-stars {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  min-height: 16px;
+}
+
+.garage-stickerbox-star {
+  display: inline-flex;
+  animation: star-twinkle 2.2s ease-in-out infinite;
+}
+
+.garage-stickerbox-star:nth-child(2n) {
+  animation-delay: 0.5s;
+}
+
+.garage-stickerbox-star:nth-child(3n) {
+  animation-delay: 1s;
+}
+
+@keyframes star-twinkle {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.22) rotate(12deg);
+    opacity: 1;
+  }
+}

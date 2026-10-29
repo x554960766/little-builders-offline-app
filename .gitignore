@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+*.log
+.env
+.env.*
+.vite/
+
+# Capacitor 原生工程（按需本地生成，不纳入版本库时保持注释状态）
+# ios/App/Pods/
+# android/.gradle/
+# android/build/
+# android/app/build/
+
+# 离线语音生成中间产物
+*.aiff

@@ -1,0 +1,201 @@
+/* ============================================================
+   HUD —— 纯图形零文字控件
+   ============================================================ */
+
+.hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.hud > * {
+  pointer-events: auto;
+}
+
+/* ---------- 左上：长按 1.5s 返回车库 ---------- */
+.hud-back {
+  position: absolute;
+  left: calc(18px + var(--safe-left));
+  top: calc(16px + var(--safe-top));
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  box-shadow:
+    0 4px 0 rgba(255, 255, 255, 0.7) inset,
+    0 -5px 10px rgba(148, 197, 222, 0.4) inset,
+    0 8px 16px rgba(56, 120, 160, 0.26);
+  transition: transform 120ms ease-out;
+}
+
+.hud-back:active {
+  transform: scale(0.94);
+}
+
+.hud-back.is-flash {
+  animation: back-flash 340ms ease-out;
+}
+
+@keyframes back-flash {
+  0% {
+    box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.9), 0 8px 16px rgba(56, 120, 160, 0.26);
+  }
+  100% {
+    box-shadow: 0 0 0 26px rgba(251, 191, 36, 0), 0 8px 16px rgba(56, 120, 160, 0.26);
+  }
+}
+
+.hud-back-ring {
+  position: absolute;
+  inset: 2px;
+  pointer-events: none;
+}
+
+.hud-back-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.12));
+}
+
+/* ---------- 右上：1~3 株幼苗等级胶囊 ---------- */
+.hud-level {
+  position: absolute;
+  right: calc(18px + var(--safe-right));
+  top: calc(16px + var(--safe-top));
+  height: 62px;
+  min-width: 128px;
+  padding: 0 18px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 4px 0 rgba(255, 255, 255, 0.7) inset,
+    0 -5px 10px rgba(148, 197, 222, 0.4) inset,
+    0 8px 16px rgba(56, 120, 160, 0.26);
+}
+
+.level-sprouts {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+.level-sprout {
+  display: inline-flex;
+  align-items: flex-end;
+  transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 220ms;
+}
+
+.level-sprout.off {
+  opacity: 0.4;
+  transform: scale(0.82) translateY(2px);
+}
+
+.level-sprout.on {
+  animation: sprout-pop 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes sprout-pop {
+  0% {
+    transform: scale(0.7);
+  }
+  60% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ---------- 右下：重播喇叭 ---------- */
+.hud-replay {
+  position: absolute;
+  right: calc(22px + var(--safe-right));
+  bottom: calc(24px + var(--safe-bottom));
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #fff9db 0%, #fde68a 100%);
+  box-shadow:
+    0 4px 0 rgba(255, 255, 255, 0.75) inset,
+    0 -5px 10px rgba(217, 160, 20, 0.32) inset,
+    0 9px 18px rgba(180, 120, 20, 0.26);
+}
+
+.hud-replay-wave {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid rgba(251, 191, 36, 0.7);
+  opacity: 0;
+}
+
+.hud-replay-wave.speaking {
+  animation: speaker-pulse 1.5s ease-out infinite;
+}
+
+@keyframes speaker-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+/* ---------- 底部步骤进度（圆点，无数字） ---------- */
+.hud-progress {
+  position: absolute;
+  left: 50%;
+  bottom: calc(30px + var(--safe-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.hud-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: rgba(148, 163, 184, 0.5);
+  transition: all 260ms ease-out;
+}
+
+.hud-dot.done {
+  background: #fbbf24;
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.8);
+}
+
+.hud-dot.current {
+  background: #38bdf8;
+  transform: scale(1.42);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.85);
+  animation: dot-breathe 1.4s ease-in-out infinite;
+}
+
+@keyframes dot-breathe {
+  0%,
+  100% {
+    transform: scale(1.35);
+  }
+  50% {
+    transform: scale(1.62);
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "little-builders-offline-app",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "萌宝工程车：英语互动乐园 —— 100% 纯离线幼儿 TPR 英语互动应用",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173",
+    "typecheck": "tsc --noEmit",
+    "voices": "node scripts/buildOfflineVoices.mjs",
+    "voices:generate": "node scripts/buildOfflineVoices.mjs --generate",
+    "cap:add:ios": "npm run build && npx cap add ios && node scripts/patchNative.mjs",
+    "cap:add:android": "npm run build && npx cap add android && node scripts/patchNative.mjs",
+    "cap:patch": "node scripts/patchNative.mjs",
+    "cap:sync": "npm run build && npx cap sync && node scripts/patchNative.mjs",
+    "cap:open:ios": "npx cap open ios",
+    "cap:open:android": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/ios": "^6.2.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.169.0",
+    "@vitejs/plugin-react": "^4.3.3",
+    "puppeteer-core": "^25.16.0",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
+  }
+}

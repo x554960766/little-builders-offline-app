@@ -1,0 +1,156 @@
+/* ============================================================
+   萌宝工程车 · 全局零文字 UI 设计令牌 (Zero-Text UI Design Tokens)
+   面向 2-3 岁幼儿：全屏锁死、绝无滚动、绝无文字
+   ============================================================ */
+
+:root {
+  /* 天空晨光渐变 */
+  --sky-top: #7dd3fc;
+  --sky-mid: #bae6fd;
+  --sky-bottom: #fef9c3;
+
+  /* 木地板沙盘底座 */
+  --floor-wood: #e8c9a0;
+  --floor-wood-dark: #d8b384;
+
+  /* 引导高光 */
+  --guide-glow: #fde047;
+  --guide-glow-soft: #fef08a;
+
+  /* 果冻按钮 */
+  --jelly-white: #ffffff;
+  --jelly-shadow: rgba(56, 120, 160, 0.28);
+
+  /* 幼苗等级色 */
+  --sprout-green: #22c55e;
+  --sprout-green-light: #86efac;
+
+  /* 安全区 */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(
+    180deg,
+    var(--sky-top) 0%,
+    var(--sky-mid) 46%,
+    var(--sky-bottom) 100%
+  );
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  color: transparent; /* 零文字防线：默认文字透明，界面绝无可见文案 */
+  cursor: default;
+  position: fixed;
+  inset: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+img,
+svg {
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+/* ---------- 通用果冻质感底座 ---------- */
+.jelly {
+  background: var(--jelly-white);
+  box-shadow:
+    0 6px 0 rgba(255, 255, 255, 0.55) inset,
+    0 -6px 10px rgba(148, 197, 222, 0.35) inset,
+    0 8px 18px var(--jelly-shadow);
+  border-radius: 999px;
+  transition: transform 120ms ease-out;
+}
+
+.jelly:active {
+  transform: scale(0.94);
+}
+
+/* ---------- 屏幕容器 ---------- */
+.app-root {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.fade-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* 呼吸光环动画（DOM 层备用） */
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.95;
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
